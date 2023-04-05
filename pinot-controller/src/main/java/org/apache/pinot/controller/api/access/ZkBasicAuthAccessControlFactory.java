@@ -32,6 +32,8 @@ import org.apache.pinot.controller.helix.core.PinotHelixResourceManager;
 import org.apache.pinot.core.auth.BasicAuthUtils;
 import org.apache.pinot.core.auth.ZkBasicAuthPrincipal;
 import org.apache.pinot.spi.env.PinotConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -45,6 +47,7 @@ import org.apache.pinot.spi.env.PinotConfiguration;
  */
 public class ZkBasicAuthAccessControlFactory implements AccessControlFactory {
     private static final String HEADER_AUTHORIZATION = "Authorization";
+    private static final Logger LOGGER = LoggerFactory.getLogger(ZkBasicAuthAccessControlFactory.class);
 
     private AccessControl _accessControl;
 
@@ -84,6 +87,7 @@ public class ZkBasicAuthAccessControlFactory implements AccessControlFactory {
 
         @Override
         public boolean hasAccess(String tableName, AccessType accessType, HttpHeaders httpHeaders, String endpointUrl) {
+            LOGGER.info("Hello World");
             return getPrincipal(httpHeaders)
                 .filter(p -> p.hasTable(tableName) && p.hasPermission(Objects.toString(accessType))).isPresent();
         }
