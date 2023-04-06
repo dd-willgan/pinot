@@ -39,7 +39,6 @@ import javax.ws.rs.core.MediaType;
 import org.apache.pinot.controller.api.access.AccessControl;
 import org.apache.pinot.controller.api.access.AccessControlFactory;
 import org.apache.pinot.controller.api.access.AccessType;
-import org.apache.pinot.controller.api.access.ZkBasicAuthAccessControlFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
