@@ -79,7 +79,7 @@ public class PinotControllerAuthResource {
   public boolean verify(@ApiParam(value = "Table name without type") @QueryParam("tableName") String tableName,
       @ApiParam(value = "API access type") @DefaultValue("READ") @QueryParam("accessType") AccessType accessType,
       @ApiParam(value = "Endpoint URL") @QueryParam("endpointUrl") String endpointUrl) {
-    LOGGER.info("%s %s %s", tableName, accessType, endpointUrl);
+    LOGGER.info("{} {} {}", tableName, accessType, endpointUrl);
     AccessControl accessControl = _accessControlFactory.create();
     return accessControl.hasAccess(tableName, accessType, _httpHeaders, endpointUrl);
   }
