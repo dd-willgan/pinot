@@ -28,7 +28,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
-  import org.apache.pinot.common.utils.BcryptUtils;
+import org.apache.pinot.common.utils.BcryptUtils;
 import org.apache.pinot.spi.config.user.UserConfig;
 import org.apache.pinot.spi.env.PinotConfiguration;
 import org.slf4j.Logger;
