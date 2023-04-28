@@ -22,12 +22,15 @@ import java.util.Collections;
 import java.util.Map;
 import javax.ws.rs.core.HttpHeaders;
 import org.apache.pinot.spi.auth.AuthProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * Auth provider for static client tokens, typically used for job specs or when mimicking legacy behavior.
  */
 public class StaticTokenAuthProvider implements AuthProvider {
+  private static final Logger LOGGER = LoggerFactory.getLogger(StaticTokenAuthProvider.class);
   public static final String HEADER = "header";
   public static final String PREFIX = "prefix";
   public static final String TOKEN = "token";
@@ -38,6 +41,7 @@ public class StaticTokenAuthProvider implements AuthProvider {
   public StaticTokenAuthProvider(String token) {
     _taskToken = token;
     _requestHeaders = Collections.singletonMap(HttpHeaders.AUTHORIZATION, token);
+    LOGGER.info("AUTH TOKEN is {}", token);
   }
 
   public StaticTokenAuthProvider(AuthConfig authConfig) {

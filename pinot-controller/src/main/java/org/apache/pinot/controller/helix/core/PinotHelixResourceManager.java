@@ -1393,6 +1393,8 @@ public class PinotHelixResourceManager {
     if (CollectionUtils.isEmpty(ZKMetadataProvider.getAllUserName(_propertyStore))) {
       String initUsername = controllerConf.getInitAccessControlUsername();
       String initPassword = controllerConf.getInitAccessControlPassword();
+      LOGGER.info("USERNAME is {}", initUsername);
+      LOGGER.info("PASSWORD is {}", initPassword);
       addUser(new UserConfig(initUsername, initPassword, ComponentType.CONTROLLER.name(), RoleType.ADMIN.name(), null,
           null));
       addUser(
