@@ -100,6 +100,12 @@ public class PinotConfigUtils {
     }
 
     Map<String, Object> properties = CommonsConfigurationUtils.toMap(new PropertiesConfiguration(configFile));
+    if (properties.containsKey("controller.segment.fetcher.auth.token")) {
+      LOGGER.info("PROPERTYCONFIG controller.segment.fetcher.auth.token = {}",
+          properties.get("controller.segment.fetcher.auth.token"));
+    } else {
+      LOGGER.info("PROPERTYCONFIG controller.segment.fetcher.auth.token not found");
+    }
     ControllerConf conf = new ControllerConf(properties);
 
     conf.setPinotFSFactoryClasses(null);

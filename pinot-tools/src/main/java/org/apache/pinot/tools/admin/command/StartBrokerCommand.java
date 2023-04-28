@@ -191,6 +191,18 @@ public class StartBrokerCommand extends AbstractBaseAdminCommand implements Comm
     if (_configOverrides != null) {
       properties.putAll(_configOverrides);
     }
+    if (properties.containsKey("pinot.broker.access.control.principals.admin.password")) {
+      LOGGER.info("PROPERTYCONFIG pinot.broker.access.control.principals.admin.password = {}",
+          properties.get("pinot.broker.access.control.principals.admin.password"));
+    } else {
+      LOGGER.info("PROPERTYCONFIG pinot.broker.access.control.principals.admin.password not found");
+    }
+    if (properties.containsKey("pinot.server.segment.fetcher.auth.token")) {
+      LOGGER.info("PROPERTYCONFIG pinot.server.segment.fetcher.auth.token = {}",
+          properties.get("pinot.server.segment.fetcher.auth.token"));
+    } else {
+      LOGGER.info("PROPERTYCONFIG pinot.server.segment.fetcher.auth.token not found");
+    }
     return properties;
   }
 }
