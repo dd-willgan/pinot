@@ -41,7 +41,7 @@ public class StaticTokenAuthProvider implements AuthProvider {
   public StaticTokenAuthProvider(String token) {
     _taskToken = token;
     _requestHeaders = Collections.singletonMap(HttpHeaders.AUTHORIZATION, token);
-    LOGGER.info("AUTH TOKEN is {}", token);
+    LOGGER.info("AUTH TOKEN DIRECTLY PASSED is {}", _taskToken);
   }
 
   public StaticTokenAuthProvider(AuthConfig authConfig) {
@@ -50,6 +50,7 @@ public class StaticTokenAuthProvider implements AuthProvider {
     String userToken = authConfig.getProperties().get(TOKEN).toString();
 
     _taskToken = makeToken(prefix, userToken);
+    LOGGER.info("AUTH TOKEN FROM CONFIG is {}", _taskToken);
     _requestHeaders = Collections.singletonMap(header, _taskToken);
   }
 

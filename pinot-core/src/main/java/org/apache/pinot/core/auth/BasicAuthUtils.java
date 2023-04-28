@@ -28,15 +28,19 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.pinot.common.auth.StaticTokenAuthProvider;
 import org.apache.pinot.common.utils.BcryptUtils;
 import org.apache.pinot.spi.config.user.UserConfig;
 import org.apache.pinot.spi.env.PinotConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
  * Utility for configuring basic auth and parsing related http tokens
  */
 public final class BasicAuthUtils {
+  private static final Logger LOGGER = LoggerFactory.getLogger(BasicAuthUtils.class);
   private static final String PASSWORD = "password";
   private static final String PERMISSIONS = "permissions";
   private static final String TABLES = "tables";
@@ -72,6 +76,7 @@ public final class BasicAuthUtils {
           Preconditions.checkArgument(StringUtils.isNotBlank(name), "%s is not a valid name", name);
 
           String password = configuration.getProperty(String.format("%s.%s.%s", prefix, name, PASSWORD));
+          LOGGER.info("PASSWORD is {}", password);
           Preconditions.checkArgument(StringUtils.isNotBlank(password), "must provide a password for %s", name);
 
           Set<String> tables = extractSet(configuration, String.format("%s.%s.%s", prefix, name, TABLES));
