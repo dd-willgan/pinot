@@ -122,6 +122,9 @@ public abstract class BaseBrokerStarter implements ServiceStartable {
     _clusterName = brokerConf.getProperty(Helix.CONFIG_OF_CLUSTER_NAME);
     ServiceStartableUtils.applyClusterConfig(_brokerConf, _zkServers, _clusterName, ServiceRole.BROKER);
 
+    LOGGER.info("At BaseBrokerStarter.init PASSWORD is {}",
+        brokerConf.getProperty("pinot.broker.access.control.principals.admin.password", "null"));
+
     setupHelixSystemProperties();
     _listenerConfigs = ListenerConfigUtil.buildBrokerConfigs(brokerConf);
     _hostname = brokerConf.getProperty(Broker.CONFIG_OF_BROKER_HOSTNAME);
@@ -222,6 +225,9 @@ public abstract class BaseBrokerStarter implements ServiceStartable {
     _helixAdmin = _spectatorHelixManager.getClusterManagmentTool();
     _propertyStore = _spectatorHelixManager.getHelixPropertyStore();
     _helixDataAccessor = _spectatorHelixManager.getHelixDataAccessor();
+
+    LOGGER.info("At BaseBrokerStarter.start PASSWORD is {}",
+        _brokerConf.getProperty("pinot.broker.access.control.principals.admin.password", "null"));
 
     LOGGER.info("Setting up broker request handler");
     // Set up metric registry and broker metrics
