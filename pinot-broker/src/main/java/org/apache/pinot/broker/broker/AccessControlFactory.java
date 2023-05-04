@@ -48,6 +48,8 @@ public abstract class AccessControlFactory {
 
   public static AccessControlFactory loadFactory(PinotConfiguration configuration,
       ZkHelixPropertyStore<ZNRecord> propertyStore) {
+    LOGGER.info("At AccessControlFactory.loadFactory PASSWORD is {}",
+        configuration.getProperty("principals.admin.password"));
     AccessControlFactory accessControlFactory;
     String accessControlFactoryClassName = configuration.getProperty(ACCESS_CONTROL_CLASS_CONFIG);
     if (accessControlFactoryClassName == null) {
